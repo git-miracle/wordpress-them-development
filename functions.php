@@ -13,7 +13,7 @@ function pageBanner($args = NULL) {
 }
 
   if(!$args['photo']){
-    if(get_field('page_banner_backgrnd')){
+    if(get_field('page_banner_backgrnd')  AND !is_archive() AND !is_home() ){
     $args['photo'] = get_field('page_banner_backgrnd')['sizes']['banner'];
   }else{
     $args['photo']= get_theme_file_uri( '/images/ocean.jpg' );
@@ -44,6 +44,11 @@ function load_styles()
     wp_enqueue_style('font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('reset_style', get_theme_file_uri('/build/index.css'));
     wp_enqueue_style('main_style', get_theme_file_uri('/build/style-index.css'));
+
+    wp_localize_script('main_js', 'universityData', array(
+      'root_url' => get_site_url()
+    ));
+  
 }
 add_action('wp_enqueue_scripts', 'load_styles');
 

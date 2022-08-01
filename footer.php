@@ -65,6 +65,8 @@
     </div>
   </div>
 </footer>
+//overlay
+
 <?php wp_footer(); ?>
 </body>
 
