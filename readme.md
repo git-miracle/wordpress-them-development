@@ -96,3 +96,8 @@ on function.php add support
 5- add image size for custom size to function.php below add supports:
 
 add_image_size('name', heght, width, auto crop yes or no)
+
+<?php 
+    $image = get_field('page_banner_backgrnd');
+    echo $image['sizes']['banner'];
+?>
