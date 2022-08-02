@@ -114,3 +114,25 @@ function adjust_query($query){
 }
 }
 add_action( 'pre_get_posts', 'adjust_query' );
+
+//redirect user to homepage
+
+add_action( 'admin_init', 'redirectHome' );
+function redirectHome(){
+  $currentUser = wp_get_current_user();
+  
+  if (count($currentUser->roles) == 1 AND $currentUser->roles[0] == 'subscriber'){
+     wp_redirect( site_url('/') );
+     exit;
+  }
+}
+
+add_action( 'wp_loaded', 'noAdminBar' );
+function noAdminBar(){
+  $currentUser = wp_get_current_user();
+  
+  if (count($currentUser->roles) == 1 AND $currentUser->roles[0] == 'subscriber'){
+     show_admin_bar(false);
+     
+  }
+}
