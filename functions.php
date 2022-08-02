@@ -1,9 +1,12 @@
 <?php
+//Custom rest api for search
+require get_theme_file_path('/inc/search-route.php');
+
 
 //Create custom rest api field
 function custom_rest_field(){
   register_rest_field( 'post', 'authorName', array(
-    'get_callback' => function(){return the_author();}
+    'get_callback' => function(){return get_the_author();}
   ));
 }
 add_action( 'rest_api_init', 'custom_rest_field');
