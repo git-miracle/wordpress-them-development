@@ -1,5 +1,15 @@
 <?php
 
+//Create custom rest api field
+function custom_rest_field(){
+  register_rest_field( 'post', 'authorName', array(
+    'get_callback' => function(){return the_author();}
+  ));
+}
+add_action( 'rest_api_init', 'custom_rest_field');
+//end of Create custom rest api field
+
+
 function pageBanner($args = NULL) {
 
   if(!$args['title']){
