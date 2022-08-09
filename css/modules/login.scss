@@ -17,15 +17,26 @@ body.login .button-primary:hover {
 }
 
 body.login {
-  background-color: $beige;
+  // background-image:linear-gradient(to right, rgba(231, 65, 234, 0.371), rgba(101, 191, 230, 0.3))url('../images/uni.jpg');
+  background: linear-gradient(135deg, orange, cyan);
 }
 
 .login h1 a {
+  // background-image: url(../images/icon.png);
   color: $mainBlue;
   font-size: 30px;
   font-weight: 300;
   background-image: none;
   width: auto;
   height: auto;
-  text-indent: 0;
+  // text-indent: 0;
+  // background-size: 84px;
+  // background-position: center top;
+  // background-repeat: no-repeat;
+}
+
+
+.login form {
+  background: linear-gradient(135deg,rgba(0, 255, 255, 0.6) ,rgba(255, 166, 0, 0.392));
+  border-radius: 5px;
 }

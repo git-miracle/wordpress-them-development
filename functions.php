@@ -136,3 +136,23 @@ function noAdminBar(){
      
   }
 }
+//customize login screen
+
+add_filter( 'login_headerurl', 'headerUrl' );
+function headerUrl(){
+  return esc_url(site_url('/' ) );
+}
+
+add_action( 'login_enqueue_scripts', 'loginCSS');
+
+function loginCSS(){
+  wp_enqueue_style('font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    wp_enqueue_style('reset_style', get_theme_file_uri('/build/index.css'));
+    wp_enqueue_style('main_style', get_theme_file_uri('/build/style-index.css'));
+}
+
+add_filter( 'login_headertitle', 'loginTitle');
+
+function loginTitle() {
+  return get_bloginfo('name');
+}
