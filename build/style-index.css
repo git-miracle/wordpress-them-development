@@ -652,6 +652,8 @@ body.login {
   outline: none;
   position: relative;
   top: 1px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 @media (max-width: 400px) {
   .note-title-field {
@@ -677,29 +679,31 @@ body.login {
   border: 1px solid transparent;
   height: 175px;
   outline: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 .note-active-field {
-  border: 1px solid #ddd;
+  border: 1px solid rgb(60, 244, 3);
   -webkit-animation: pulseBorder 0.75s alternate infinite;
           animation: pulseBorder 0.75s alternate infinite;
 }
 
 @-webkit-keyframes pulseBorder {
   0% {
-    border: 1px solid #fff;
+    border: 1px solid rgb(223, 244, 128);
   }
   100% {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(113, 184, 94);
   }
 }
 
 @keyframes pulseBorder {
   0% {
-    border: 1px solid #fff;
+    border: 1px solid rgb(223, 244, 128);
   }
   100% {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(113, 184, 94);
   }
 }
 /* Create Note */
