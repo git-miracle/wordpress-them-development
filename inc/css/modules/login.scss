@@ -1,0 +1,42 @@
+/* Customize Login Screen */
+
+body.login .button-primary {
+  background-color: $darkOrange;
+  border-color: scale-color($darkOrange, $lightness: -10%);
+  text-shadow: 0 -1px 1px scale-color($darkOrange, $lightness: -15%), 1px 0 1px scale-color($darkOrange, $lightness: -15%), 0 1px 1px scale-color($darkOrange, $lightness: -15%), -1px 0 1px scale-color($darkOrange, $lightness: -15%);
+  box-shadow: 0 1px 0 scale-color($darkOrange, $lightness: -20%);
+}
+
+body.login .button-primary:active,
+body.login .button-primary:focus,
+body.login .button-primary:hover {
+  background-color: scale-color($darkOrange, $lightness: -9%);
+  border-color: $darkOrange;
+  text-shadow: 0 -1px 1px scale-color($darkOrange, $lightness: -20%), 1px 0 1px scale-color($darkOrange, $lightness: -20%), 0 1px 1px scale-color($darkOrange, $lightness: -20%), -1px 0 1px scale-color($darkOrange, $lightness: -20%);
+  box-shadow: 0 1px 0 scale-color($darkOrange, $lightness: -25%);
+}
+
+body.login {
+  // background-image:linear-gradient(to right, rgba(231, 65, 234, 0.371), rgba(101, 191, 230, 0.3))url('../images/uni.jpg');
+  background: linear-gradient(135deg, orange, cyan);
+}
+
+.login h1 a {
+  // background-image: url(../images/icon.png);
+  color: $mainBlue;
+  font-size: 30px;
+  font-weight: 300;
+  background-image: none;
+  width: auto;
+  height: auto;
+  // text-indent: 0;
+  // background-size: 84px;
+  // background-position: center top;
+  // background-repeat: no-repeat;
+}
+
+
+.login form {
+  background: linear-gradient(135deg,rgba(0, 255, 255, 0.6) ,rgba(255, 166, 0, 0.392));
+  border-radius: 5px;
+}

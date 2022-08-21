@@ -25,16 +25,15 @@ while (have_posts()) {
   while ($userNote->have_posts()){
     $userNote->the_post(); ?>
     <li data-id='<?php the_ID() ?>'>
-      <input readonly class='note-title-field' type="text" value="<?php echo esc_attr(get_the_title()); ?>">
+      <input readonly class='note-title-field' type="text"
+        value="<?php echo str_replace('Private: ', '',esc_attr(get_the_title())); ?>">
+
       <span class='edit-note'><i class='fa fa-pencil'></i> Edit</span>
       <span class='delete-note'><i class='fa fa-trash'> </i> Delete</span>
       <textarea readonly
         class='note-body-field'><?php echo esc_attr(wp_strip_all_tags( get_the_content() )); ?></textarea>
       <span class='update-note btn btn--blue btn--small'><i class='<i class="fa-solid fa-floppy-disk"></i>'></i>
         Save</span>
-
-
-
     </li>
     <?php }
   ?>

@@ -113,9 +113,6 @@ class MyNotes{
         class='note-body-field'>${response.content.raw}</textarea>
       <span class='update-note btn btn--blue btn--small'><i class='<i class="fa-solid fa-floppy-disk"></i>'></i>
         Save</span>
-
-
-
     </li>
         `).prependTo('#my-notes').hide().slideDown()
         console.log('added');
