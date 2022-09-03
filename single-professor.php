@@ -19,6 +19,46 @@ while (have_posts()) {
       </div>
 
       <div class="two-thirds">
+        <?php
+        $like = new WP_Query(array(
+          'post_type'=>'like',
+          'meta_query' => array(
+            array(
+              'key' => 'like_id',
+              'compare' => '=',
+              'value'=>get_the_ID()
+            )
+          
+          )
+            ));
+
+        $existLike = 'no'; 
+        if (is_user_logged_in()) {
+          $existQuery = new WP_Query(array(
+            'author' => get_current_user_id(),
+            'post_type'=>'like',
+            'meta_query' => array(
+              array(
+                'key' => 'like_id',
+                'compare' => '=',
+                'value'=>get_the_ID()
+              )
+            
+            )
+              ));
+              
+              if($existQuery->found_posts){
+                $existLike = 'yes';
+              }
+        }  
+        
+        ?>
+        <span class="like-box" data-like='<?php echo $existQuery->posts[0]->ID; ?>' data-professor='<?php the_ID(); ?>'
+          data-exists='<?php echo $existLike; ?>'>
+          <i class="fa fa-heart-o"></i>
+          <i class="fa fa-heart"></i>
+          <span class="like-count"><?php echo $like->found_posts ?></span>
+        </span>
         <?php the_content(); ?>
       </div>
 
@@ -32,7 +72,7 @@ while (have_posts()) {
 
     if($relatedProgram){
       echo '<ul>';
-      echo '<h2>Subject tought:</h2>';
+      echo '<h2>Subject by this teacher:</h2>';
       
       foreach($relatedProgram AS $program) { ?>
 

@@ -3894,7 +3894,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/HeroSlider */ "./src/modules/HeroSlider.js");
 /* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
 /* harmony import */ var _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/MyNotes */ "./src/modules/MyNotes.js");
+/* harmony import */ var _modules_like__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/like */ "./src/modules/like.js");
  // Our modules / classes
+
 
 
 
@@ -3905,6 +3907,7 @@ const mobileMenu = new _modules_MobileMenu__WEBPACK_IMPORTED_MODULE_1__["default
 const heroSlider = new _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__["default"]();
 const search = new _modules_Search__WEBPACK_IMPORTED_MODULE_3__["default"]();
 const myNotes = new _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__["default"]();
+const liek = new _modules_like__WEBPACK_IMPORTED_MODULE_5__["default"]();
 
 /***/ }),
 
@@ -4049,6 +4052,10 @@ class MyNotes {
         noteId.slideUp();
         console.log('deleted');
         console.log(response);
+
+        if (response.noteCount < 5) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.note-limit-message').removeClass('active');
+        }
       },
       error: response => {
         console.log('error');
@@ -4112,6 +4119,10 @@ class MyNotes {
         console.log(response);
       },
       error: response => {
+        if (response.responseText == 'You have rached note limit.') {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.note-limit-message').addClass('active');
+        }
+
         console.log('error');
         console.log(response);
       }
@@ -4289,6 +4300,94 @@ class Search {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Search);
+
+/***/ }),
+
+/***/ "./src/modules/like.js":
+/*!*****************************!*\
+  !*** ./src/modules/like.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+class Like {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.like-box').on('click', this.clickEvent.bind(this));
+  } //methods
+
+
+  clickEvent(e) {
+    var likeBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest('.like-box');
+
+    if (likeBox.attr('data-exists') == 'yes') {
+      this.deleteLike(likeBox);
+    } else {
+      this.addLike(likeBox);
+    }
+  }
+
+  addLike(likeBox) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      beforeSend: xhr => {
+        xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
+      },
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      type: 'POST',
+      data: {
+        'professorId': likeBox.data('professor')
+      },
+      success: response => {
+        likeBox.attr('data-exists', 'yes');
+        var likeCount = parseInt(likeBox.find('.like-count').html(), 10);
+        likeCount++;
+        likeBox.find('.like-count').html(likeCount);
+        likeBox.attr('data-like', response);
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    }); // alert('add likeed')
+  }
+
+  deleteLike(likeBox) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      beforeSend: xhr => {
+        xhr.setRequestHeader('X-WP-Nonce', universityData.nonce);
+      },
+      url: universityData.root_url + '/wp-json/university/v1/manageLike',
+      data: {
+        'like': likeBox.attr('data-like')
+      },
+      type: 'DELETE',
+      success: response => {
+        likeBox.attr('data-exists', 'no');
+        var likeCount = parseInt(likeBox.find('.like-count').html(), 10);
+        likeCount--;
+        likeBox.find('.like-count').html(likeCount);
+        likeBox.attr('data-like', '');
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    }); // alert('delete liked')
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Like);
 
 /***/ }),
 

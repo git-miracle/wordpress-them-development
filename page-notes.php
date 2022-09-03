@@ -10,10 +10,12 @@ while (have_posts()) {
   ?>
 <div class="container container--narrow page-section">
   <div class="create-note">
+
     <h2 class='headline headline--medium'>Create new note</h2>
     <input type="text" class='new-note-title' placeholder='Title'>
     <textarea class='new-note-body' placeholder='Your note here...'></textarea>
     <span class='submit-note'>Create note</span>
+    <span class='note-limit-message'>note limit reached!</span>
   </div>
   <ul class='min-list link-list' id='my-notes'>
     <?php

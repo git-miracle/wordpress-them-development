@@ -54,6 +54,10 @@ class MyNotes{
         noteId.slideUp();
         console.log('deleted');
         console.log(response);
+        if(response.noteCount < 5){
+          $('.note-limit-message').removeClass('active');
+
+        }
       } ,
       error: (response) => {
         console.log('error');
@@ -119,6 +123,9 @@ class MyNotes{
         console.log(response);
       } ,
       error: (response) => {
+        if(response.responseText == 'You have rached note limit.'){
+            $('.note-limit-message').addClass('active');
+        }
         console.log('error');
 
         console.log(response);
