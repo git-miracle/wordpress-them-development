@@ -84,6 +84,9 @@ function site_features()
     add_image_size( 'portrait', 480 ,650 , true  );
     add_image_size( 'big',  300, 600 , true);
     add_image_size( 'banner', 1500, 350, true );
+    add_image_size( 'slide', 1500, 550, true );
+    add_image_size( 'hero', 1500, 550, true );
+
 
     register_nav_menus(array(
         'header-menu' => 'Header Menu',
@@ -181,3 +184,11 @@ function makeNotePrivate($data, $postarr) {
   
   return $data;
 } 
+
+add_filter('ai1wm_exclude_content_from_export','ignoreFiles' );
+
+function ignoreFiles($exclude_filter) {
+  $exclude_filter[] = 'themes/Fictional_University/node_modules';
+  
+  return $exclude_filter;
+}

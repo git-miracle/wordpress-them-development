@@ -26,7 +26,6 @@ function addLike($data){
           'compare' => '=',
           'value'=> $professor
         )
-      
       )
         ));
 
@@ -40,15 +39,13 @@ function addLike($data){
         )
         ));
     }else{
-      die('invalid professor ID');
+      die('Invalid professor ID');
     }
   
   }else{
     die('only logged in user can like');
   }
-
-  
-}
+ }
 
 function deleteLike($data){
 $likeId = sanitize_text_field($data['like'] );
