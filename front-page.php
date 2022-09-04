@@ -1,14 +1,16 @@
 <?php get_header(); ?>
 
 <div class="page-banner">
-  <div class="page-banner__bg-image"
-    style="background-image: url(<?php echo get_theme_file_uri('images/library-hero.jpg') ?>)"></div>
+  <div class="page-banner__bg-image" style="background-image: url(<?php 
+    $image = get_field('home_hero_image');
+    echo $image['sizes']['hero'];
+    ?>)"></div>
   <div class="page-banner__content container t-center c-white">
-    <h1 class="headline headline--large">Welcome!</h1>
-    <h2 class="headline headline--medium">We think you&rsquo;ll like it here.</h2>
-    <h3 class="headline headline--small">Why don&rsquo;t you check out the <strong>major</strong> you&rsquo;re
-      interested in?</h3>
-    <a href="<?php  echo get_post_type_archive_link( 'program' )?>" class="btn btn--large btn--blue">Find Your Major</a>
+    <h1 class="headline headline--large"><?php echo get_field('home_title') ?></h1>
+    <h2 class="headline headline--medium"><?php echo get_field('home_sub1') ?></h2>
+    <h3 class="headline headline--small"><?php echo get_field('home_sub2') ?></h3>
+    <a href="<?php echo get_field('home_botton_link') ?>"
+      class="btn btn--large btn--blue"><?php echo get_field('home_botton') ?></a>
   </div>
 </div>
 
@@ -107,36 +109,30 @@
 <div class="hero-slider">
   <div data-glide-el="track" class="glide__track">
     <div class="glide__slides">
-      <div class="hero-slider__slide"
-        style="background-image: url(<?php echo get_theme_file_uri('/images/bus.jpg'); ?>)">
+      <?php
+          $slideHome = new WP_Query(array(
+            'post_type' => 'slide', 
+            'posts_per_page' => 3,
+          ));
+          while($slideHome->have_posts()){
+            $slideHome->the_post();?>
+
+      <div class="hero-slider__slide" style="background-image: url(<?php 
+         $image = get_field('slide_image');
+         echo $image['sizes']['slide'];
+        ?>)">
         <div class="hero-slider__interior container">
           <div class="hero-slider__overlay">
-            <h2 class="headline headline--medium t-center">Free Transportation</h2>
-            <p class="t-center">All students have free unlimited bus fare.</p>
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+            <h2 class="headline headline--medium t-center"><?php echo get_field('slide_title'); ?></h2>
+            <p class="t-center"><?php echo get_field('slide_subtitle'); ?></p>
+            <p class="t-center no-margin"><a href="<?php echo get_field('botton_link'); ?>"
+                class="btn btn--blue"><?php echo get_field('slide_botton'); ?></a>
+            </p>
           </div>
+
         </div>
       </div>
-      <div class="hero-slider__slide"
-        style="background-image: url(<?php echo get_theme_file_uri('images/apples.jpg') ?> )">
-        <div class="hero-slider__interior container">
-          <div class="hero-slider__overlay">
-            <h2 class="headline headline--medium t-center">An Apple a Day</h2>
-            <p class="t-center">Our dentistry program recommends eating apples.</p>
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-slider__slide"
-        style="background-image: url(<?php echo get_theme_file_uri('images/bread.jpg') ?>)">
-        <div class="hero-slider__interior container">
-          <div class="hero-slider__overlay">
-            <h2 class="headline headline--medium t-center">Free Food</h2>
-            <p class="t-center">Fictional University offers lunch plans for those in need.</p>
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
     </div>
     <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]"></div>
   </div>
